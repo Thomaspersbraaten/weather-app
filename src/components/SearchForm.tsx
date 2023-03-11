@@ -1,17 +1,8 @@
 import { useState, useEffect } from "react";
 import cities from "./arrays/nor.json";
 import { locForecast } from "./api/locationForecast";
-
-interface City {
-  admin_name: string;
-  capital: string;
-  city: string;
-  iso2: string;
-  lat: string;
-  lng: string;
-  population: string;
-  population_proper: string;
-}
+import { Link } from "react-router-dom";
+import City from "./types/city";
 
 function SearchForm() {
   const [input, setInput] = useState<string>("");
@@ -50,17 +41,20 @@ function SearchForm() {
       />
       {citiesSelection &&
         citiesSelection.map((cit) => (
-          <div
-            key={cit.city}
-            className="bg-cyan-300 p-2 m-2 rounded-md text-stone-800 font-bold"
-            onClick={() => {
-              setLat(cit.lat);
-              setLng(cit.lng);
-              // setCurrentCity(cit);
-            }}
-          >
+          // <div
+          //   key={cit.city}
+          //   className="bg-cyan-300 p-2 m-2 rounded-md text-stone-800 font-bold"
+          //   onClick={() => {
+          //     setLat(cit.lat);
+          //     setLng(cit.lng);
+          //     // setCurrentCity(cit);
+          //   }}
+          // >
+          //   {cit.city}
+          // </div>
+          <Link to={`${cit.city}`} key={cit.city} className="bg-cyan-300 p-2 m-2 rounded-md text-stone-800 font-bold">
             {cit.city}
-          </div>
+          </Link>
         ))}
       <button className="bg-sky-500 hover:bg-sky-700 rounded-3xl p-2 m-3">Save changes</button>
     </form>
